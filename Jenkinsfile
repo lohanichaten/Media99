@@ -8,6 +8,7 @@ pipeline{
 		}
     		stage('Setup'){
       			steps{
+				sh 'chmod +x install.sh'
         			sh './install.sh'
       			}
     		}
