@@ -1,5 +1,9 @@
 pipeline{
 	agent {label 'master'}
+	environment {
+        	FLASK_DEBUG=1
+		FLASK_APP=flasky.py
+    	}
 	stages{
 		stage('Checkout'){
 			steps{
