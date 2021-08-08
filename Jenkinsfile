@@ -32,7 +32,7 @@ pipeline{
 			steps{
 				//tool name: 'D1', type: 'dockerTool'
 				sh ''' 
-					docker build -t anjurose/test . + ":$BUILD_NUMBER
+					docker build -t anjurose/test . + ":$BUILD_NUMBER"
 					'''
 			}
 		}
