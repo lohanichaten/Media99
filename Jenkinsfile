@@ -1,5 +1,5 @@
 pipeline{
-	agent {label 'master'}
+	agent { docker { image 'python:3.7.2' } }
 	environment {
         	FLASK_DEBUG=1
 		FLASK_APP="flasky.py"
