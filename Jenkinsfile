@@ -3,7 +3,7 @@ pipeline{
 	environment {
         	FLASK_DEBUG=1
 		FLASK_APP="flasky.py"
-		registry = "hub.docker.com/anjurose" 
+		registry = "anjurose/test" 
 	        registryCredential = 'HubID1' 
 	        dockerImage = '' 
     	}
