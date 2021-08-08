@@ -17,6 +17,11 @@ pipeline{
 				sh 'python -m unittest'
       			}
    		}
+		stage('Run'){
+      			steps{
+				sh 'flask run --host 0.0.0.0'
+      			}
+   		}
 	}
 }
 			
