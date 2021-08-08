@@ -1,6 +1,5 @@
 pipeline{
 	agent{label 'master'}
-	tool name: 'P3', type: 'jenkins.plugins.shiningpanda.tools.PythonInstallation'
 	environment {
         	FLASK_DEBUG=1
 		FLASK_APP="flasky.py"
@@ -16,8 +15,8 @@ pipeline{
 				sh 'chmod +x install.sh'
         			sh './install.sh'
 				sh 'python --version' 
-				sh 'python -m pip install --upgrade pip'
-				sh 'python --version' 
+				//sh 'python -m pip install --upgrade pip'
+				//sh 'python --version' 
       			}
     		}
     		stage('Test'){
