@@ -3,7 +3,9 @@ pipeline{
 	environment {
         	FLASK_DEBUG=1
 		FLASK_APP="flasky.py"
-		
+		registry = "hub.docker.com/anjurose" 
+	        registryCredential = 'HubID1' 
+	        dockerImage = '' 
     	}
 	stages{
 		stage('Checkout'){
@@ -30,14 +32,16 @@ pipeline{
    		}
 		stage('Build image'){
 			steps{
-				//tool name: 'D1', type: 'dockerTool'
-				sh ''' 
-					docker build -t anjurose/test . + ":$BUILD_NUMBER"
-					'''
+				dockerImage = docker.build registry + ":$BUILD_NUMBER" 
 			}
 		}
-				//withDockerRegistry(credentialsId: 'HubID1', url: 'https://hub.docker.com/'){
-					//sh 'docker build
+		stage('Deploy our image') { 
+    		        steps { 
+		               docker.withRegistry( '', registryCredential ) { 
+		               dockerImage.push() 
+			       }
+                	} 
+	            }
 		stage('Run'){
       			steps{
 				sh '''#!/bin/bash
