@@ -4,7 +4,7 @@ sudo apt-get -y install python3-pip python3-dev build-essential libssl-dev libff
 sudo apt update
 sudo apt-get -y install libmysqlclient-dev
 pip3 install wheel
-sudo apt-get install python3.7
+sudo apt-get install python3.6
 sudo apt -y install python3-venv
 python3 -m venv myprojectenv
 source myprojectenv/bin/activate
