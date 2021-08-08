@@ -31,7 +31,7 @@ pipeline{
 		stage('Build image'){
 			steps{
 				tool name: 'D1', type: 'dockerTool'
-				sh 'docker.build + ":$BUILD_NUMBER"
+				sh 'docker.build + ":$BUILD_NUMBER"'
 			}
 		}
 				//withDockerRegistry(credentialsId: 'HubID1', url: 'https://hub.docker.com/'){
