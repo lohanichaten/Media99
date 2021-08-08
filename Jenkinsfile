@@ -3,6 +3,7 @@ pipeline{
 	environment {
         	FLASK_DEBUG=1
 		FLASK_APP="flasky.py"
+		
     	}
 	stages{
 		stage('Checkout'){
@@ -27,6 +28,15 @@ pipeline{
 				     '''
                			}
    		}
+		stage('Build image'){
+			steps{
+				script { 
+		                    dockerImage = docker.build + ":$BUILD_NUMBER" 
+		               }
+			}
+		}
+				//withDockerRegistry(credentialsId: 'HubID1', url: 'https://hub.docker.com/'){
+					//sh 'docker build
 		stage('Run'){
       			steps{
 				sh '''#!/bin/bash
