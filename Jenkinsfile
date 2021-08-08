@@ -15,6 +15,8 @@ pipeline{
 				sh 'chmod +x install.sh'
         			sh './install.sh'
 				sh 'python --version' 
+				sh 'python -m pip install --upgrade pip'
+				sh 'python --version' 
       			}
     		}
     		stage('Test'){
