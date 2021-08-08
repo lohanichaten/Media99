@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 sudo apt update
 sudo apt-get -y install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools
 sudo apt update
