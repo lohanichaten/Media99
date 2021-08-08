@@ -30,9 +30,8 @@ pipeline{
    		}
 		stage('Build image'){
 			steps{
-				script { 
-		                    dockerImage = docker.build + ":$BUILD_NUMBER" 
-		               }
+				tool name: 'D1', type: 'dockerTool'
+				sh 'docker build -t anjurose/demo + $BUILD_NUMBER'
 			}
 		}
 				//withDockerRegistry(credentialsId: 'HubID1', url: 'https://hub.docker.com/'){
