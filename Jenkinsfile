@@ -1,8 +1,6 @@
 pipeline{
 	agent{label 'master'}
-	tools{
-        	python 'P3'
-   	}
+	tool name: 'P3', type: 'jenkins.plugins.shiningpanda.tools.PythonInstallation'
 	environment {
         	FLASK_DEBUG=1
 		FLASK_APP="flasky.py"
