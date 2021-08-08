@@ -22,6 +22,7 @@ pipeline{
     		stage('Test'){
       			steps{
 				 sh '''#!/bin/bash
+				     source myprojectenv/bin/activate	
                 		     python -m unittest
 				     '''
                			}
