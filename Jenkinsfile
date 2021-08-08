@@ -21,8 +21,10 @@ pipeline{
     		}
     		stage('Test'){
       			steps{
-				sh 'python -m unittest'
-      			}
+				 sh '''#!/bin/bash
+                		     python -m unittest
+				     '''
+               			}
    		}
 		stage('Run'){
       			steps{
