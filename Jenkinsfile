@@ -55,6 +55,7 @@ pipeline{
    		}*/
 		stage('DockerDeploy'){
       			steps{
+				sh 'ansible -m ping -i ./inventory.yml all'
 				ansiblePlaybook become: true, becomeUser: 'ubuntu', credentialsId: 'UbuntuID1', installation: 'A1', inventory: './inventory.yml', playbook: './app_playbook.yml'
       			}
    		}
