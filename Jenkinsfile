@@ -32,6 +32,7 @@ pipeline{
    		}
 		stage('Build image'){
 			steps{
+				tool name: 'D1', type: 'dockerTool'
 				script { 
 					dockerImage = docker.build registry + ":$BUILD_NUMBER" }
 			}
