@@ -45,12 +45,17 @@ pipeline{
 			       }
                 	} 
 	            }
-		stage('Run'){
+		/*stage('TestRun'){
       			steps{
 				sh '''#!/bin/bash
 				     source myprojectenv/bin/activate 
 				     flask run --host 0.0.0.0
 				     '''
+      			}
+   		}*/
+		stage('DockerDeploy'){
+      			steps{
+				ansiblePlaybook become: true, becomeUser: 'ubuntu', credentialsId: 'UbuntuID1', installation: 'A1', inventory: './inventory.yml', playbook: './app_playbook.yml'
       			}
    		}
 	}
