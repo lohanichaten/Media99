@@ -10,4 +10,4 @@
       name: docker.io
       state: present
    - name: Run Docker Container
-     command: chdir= docker run -it -d -p 8085:5000 anjurose/test:latest
+     command: chdir= docker run -it -d -p 8085:5000 anjurose/test
