@@ -34,7 +34,7 @@ pipeline{
 			steps{
 				tool name: 'D1', type: 'dockerTool'
 				script { 
-					dockerImage = docker.build registry + ":$BUILD_NUMBER" }
+					dockerImage = docker.build registry + ":latest" }
 			}
 		}
 		stage('Deploy our image') { 
