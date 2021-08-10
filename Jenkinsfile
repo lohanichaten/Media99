@@ -55,8 +55,8 @@ pipeline{
    		}*/
 		stage('DockerDeploy'){
       			steps{
-				sh 'ansible -m ping -i ./inventory.yml all'
-				ansiblePlaybook credentialsId: 'UbuntuID1', installation: 'A1', inventory: './inventory.yml', playbook: './app_playbook.yml'
+				//sh 'ansible -m ping -i ./inventory.yml all'
+				ansiblePlaybook credentialsId: 'UbuntuID1', disableHostKeyChecking: true , installation: 'A1', inventory: './inventory.yml', playbook: './app_playbook.yml'
       			}
    		}
 	}
