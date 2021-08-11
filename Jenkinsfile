@@ -27,26 +27,6 @@ pipeline{
 				     '''
                			}
    		}
-		stage('Build image'){
-			steps{
-				tool name: 'D1', type: 'dockerTool'
-				script { 
-					dockerImage = docker.build registry + ":latest" }
-			}
-		}
-		stage('Deploy our image') { 
-    		        steps { 
-			       script { 
-		               		docker.withRegistry( '', registryCredential ) { 
-					dockerImage.push() }
-			       }
-                	} 
-	            }
-		stage('DockerDeploy'){
-      			steps{
-				ansiblePlaybook credentialsId: 'UbuntuID1', disableHostKeyChecking: true , installation: 'A1' , inventory: './inventory.yml', playbook: './app_playbook.yml'
-      			}
-   		}
 	}
 }
 			
