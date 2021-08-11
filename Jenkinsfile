@@ -3,23 +3,20 @@ pipeline{
 	environment {
         	FLASK_DEBUG=1
 		FLASK_APP="flasky.py"
-		registry = "anjurose/test" 
+		registry = "anjurose/media99" 
 	        registryCredential = 'HubID1' 
 	        dockerImage = '' 
     	}
 	stages{
 		stage('Checkout'){
 			steps{
-				git branch: 'master', url: 'https://github.com/AnjuMeleth/flasky.git'
+				git branch: 'master', url: 'https://github.com/AnjuMeleth/Media99.git'
 			}
 		}
     		stage('Setup'){
       			steps{
 				sh 'chmod +x install.sh'
         			sh './install.sh'
-				//sh 'python --version' 
-				//sh 'python -m pip install --upgrade pip'
-				//sh 'python --version' 
       			}
     		}
     		stage('Test'){
@@ -45,17 +42,8 @@ pipeline{
 			       }
                 	} 
 	            }
-		/*stage('TestRun'){
-      			steps{
-				sh '''#!/bin/bash
-				     source myprojectenv/bin/activate 
-				     flask run --host 0.0.0.0
-				     '''
-      			}
-   		}*/
 		stage('DockerDeploy'){
       			steps{
-				//sh 'ansible -m ping -i ./inventory.yml all'
 				ansiblePlaybook credentialsId: 'UbuntuID1', disableHostKeyChecking: true , installation: 'A1' , inventory: './inventory.yml', playbook: './app_playbook.yml'
       			}
    		}
