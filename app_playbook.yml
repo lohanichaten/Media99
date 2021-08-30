@@ -2,7 +2,7 @@
 - hosts: all
   become: yes
   become_user: ubuntu
-  vars_files: testsecret.yml
+  vars_files: secret.yml
   tasks:
    - name: apt-update
      become_user: root
