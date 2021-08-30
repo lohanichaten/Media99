@@ -1,13 +1,40 @@
 ---
 - hosts: all
-  become: true
+  become: yes
+  become_user: ubuntu
+  vars_files: testsecret.yml
   tasks:
    - name: apt-update
+     become_user: root
      apt:
-      update_cache: yes
+      update_cache: yes   
    - name: Install Docker
+     become_user: root
      apt:
       name: docker.io
       state: present
+   - name: Create new directory
+     file:
+      path: /home/ubuntu/target
+      state: directory
+   - name: Copy the source code to hosts
+     copy: src=./{{ item }} dest=/home/ubuntu/target/
+     with_items:
+        - app
+        - migrations
+        - flasky.py
+        - config.py
+        - boot.sh
+        - data-dev.sqlite
+        - Dockerfile
+   - name: Copy the source code to hosts
+     copy: src=./{{ item }} dest=/home/ubuntu/target/
+     with_items:
+        - requirements 
+   - name: Build Docker Image
+     become_user: root
+     command: chmod +x /home/ubuntu/target/boot.sh  
+   - name: Build Docker Image
+     command: chdir=/home/ubuntu/target/ docker build . -t anjurose/flasky
    - name: Run Docker Container
-     command: chdir= docker run -it -d -p 8085:5000 anjurose/test:latest
+     command: chdir=/home/ubuntu/target/ docker run -itd -e SECRET_KEY="{{ SECRET_KEY }}" -p 8085:5000 anjurose/flasky
