@@ -1,12 +1,5 @@
 pipeline{
 	agent{label 'master'}
-	environment {
-        	FLASK_DEBUG=1
-		FLASK_APP="flasky.py"
-		registry = "anjurose/test" 
-	        registryCredential = 'HubID1' 
-	        dockerImage = '' 
-    	}
 	stages{
 		stage('Checkout'){
 			steps{
@@ -27,26 +20,9 @@ pipeline{
 				     '''
                			}
    		}
-		stage('Build image'){
-			steps{
-				tool name: 'D1', type: 'dockerTool'
-				script { 
-					dockerImage = docker.build registry + ":latest" }
-			}
-		}
-		stage('Deploy our image') { 
-    		        steps { 
-			       script { 
-		               		docker.withRegistry( '', registryCredential ) { 
-					dockerImage.push() }
-			       }
-                	} 
-	            }
-		stage('DockerDeploy'){
+		stage('invoke playbook'){
       			steps{
-				ansiblePlaybook credentialsId: 'UbuntuID1', disableHostKeyChecking: true , installation: 'A1' , inventory: './inventory.yml', playbook: './app_playbook.yml'
-      			}
+				ansiblePlaybook credentialsId: 'UbuntuID1', disableHostKeyChecking: true, inventory: '/etc/ansible/hosts', installation: 'A1', playbook: './testplaybook.yml', vaultCredentialsId: 'secret'               			}
    		}
 	}
 }
-			
