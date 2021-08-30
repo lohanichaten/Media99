@@ -4,20 +4,20 @@
   vars_files: secret.yml
   tasks:
    - name: apt-update
-     become_user: root
      apt:
       update_cache: yes   
    - name: Install Docker
-     become_user: root
      apt:
       name: docker.io
       state: present
    - name: Create new directory
+     become_user: ubuntu
      file:
       path: /home/ubuntu/target
       state: directory
    - name: Copy the source code to hosts
      copy: src=./{{ item }} dest=/home/ubuntu/target/
+     become_user: ubuntu
      with_items:
         - app
         - migrations
@@ -26,12 +26,8 @@
         - boot.sh
         - data-dev.sqlite
         - Dockerfile
-   - name: Copy the source code to hosts
-     copy: src=./{{ item }} dest=/home/ubuntu/target/
-     with_items:
-        - requirements 
-   - name: Build Docker Image
-     become_user: root
+        - requirements
+   - name: Set the executable permission
      command: chmod +x /home/ubuntu/target/boot.sh  
    - name: Build Docker Image
      command: chdir=/home/ubuntu/target/ docker build . -t anjurose/flasky
