@@ -3,10 +3,7 @@ pipeline{
 	environment {
         	FLASK_DEBUG=1
 		FLASK_APP="flasky.py"
-		registry = "anjurose/media99" 
-	        registryCredential = 'HubID1' 
-	        dockerImage = '' 
-    	}
+	}
 	stages{
 		stage('Checkout'){
 			steps{
