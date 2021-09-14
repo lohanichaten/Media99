@@ -30,6 +30,6 @@
    - name: Set the executable permission
      command: chmod +x /home/ubuntu/target/boot.sh  
    - name: Build Docker Image
-     command: chdir=/home/ubuntu/target/ docker build . -t anjurose/flasky
+     command: chdir=/home/ubuntu/target/ docker build . -t mediaapp
    - name: Run Docker Container
-     command: chdir=/home/ubuntu/target/ docker run -itd -e SECRET_KEY="{{ SECRET_KEY }}" -p 8085:5000 anjurose/flasky
+     command: chdir=/home/ubuntu/target/ docker run -itd -e SECRET_KEY="{{ SECRET_KEY }}" -p 8085:5000 mediaapp
