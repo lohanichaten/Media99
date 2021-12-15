@@ -11,12 +11,12 @@
       name: docker.io
       state: present
    - name: Create new directory
-     become_user: root
+     become_user: anonymous
      file:
-      path: /home/ubuntu/target
+      path: /home/anonymous/target
       state: directory
    - name: Copy the source code to hosts
-     copy: src=./{{ item }} dest=/home/ubuntu/target/
+     copy: src=./{{ item }} dest=/home/anonymous/target/
      become_user: ubuntu
      with_items:
         - app
@@ -28,8 +28,8 @@
         - Dockerfile
         - requirements
    - name: Set the executable permission
-     command: chmod +x /home/ubuntu/target/boot.sh  
+     command: chmod +x /home/anonymous/target/boot.sh  
    - name: Build Docker Image
-     command: chdir=/home/ubuntu/target/ docker build . -t mediaapp
+     command: chdir=/home/anonymous/target/ docker build . -t mediaapp
    - name: Run Docker Container
-     command: chdir=/home/ubuntu/target/ docker run -itd -e SECRET_KEY="{{ SECRET_KEY }}" -p 8085:5000 mediaapp
+     command: chdir=/home/anonymous/target/ docker run -itd -e SECRET_KEY="{{ SECRET_KEY }}" -p 8085:5000 mediaapp
