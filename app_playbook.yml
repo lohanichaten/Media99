@@ -17,7 +17,7 @@
       state: directory
    - name: Copy the source code to hosts
      copy: src=./{{ item }} dest=/home/anonymous/target/
-     become_user: ubuntu
+     become_user: anonymous
      with_items:
         - app
         - migrations
