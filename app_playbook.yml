@@ -11,7 +11,7 @@
       name: docker.io
       state: present
    - name: Create new directory
-     become_user: ubuntu
+     become_user: root
      file:
       path: /home/ubuntu/target
       state: directory
